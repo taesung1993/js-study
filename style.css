@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100%;
+}
+
+#container {
+  width: 70%;
+  margin: 10% auto 0 auto;
+}
+
+#header {
+  margin-bottom: 30px;
+}
+
+#header h1 {
+  text-align: center;
+}
+
+#chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

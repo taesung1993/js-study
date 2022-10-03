@@ -1,52 +1,103 @@
-const svg = d3.select("#chart svg");
-const width = svg.node().clientWidth;
-const height = svg.node().clientHeight;
-const radius = Math.min(width, height) / 2;
+const data = [
+  {
+    name: "미국",
+    value: 40,
+  },
+  {
+    name: "한국",
+    value: 20,
+  },
+  {
+    name: "캐나다",
+    value: 30,
+  },
+  {
+    name: "일본",
+    value: 10,
+  },
+];
+
+const size = {
+  width: 260,
+  height: 260,
+  thickness: 40,
+  duration: 750,
+  get radius() {
+    return Math.min(this.width, this.height) / 2;
+  },
+};
+
+const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+const svg = d3
+  .select("#chart")
+  .append("svg")
+  .attr("class", "pie")
+  .attr("width", size.width)
+  .attr("height", size.height);
 
 const g = svg
   .append("g")
-  .attr("transform", `translate(${width / 2}, -${height / 2})`);
-
-const color = d3
-  .scaleSequential()
-  .domain([1, 10])
-  .interpolator(d3.interpolateRainbow);
-
-const data = [20, 80];
-const pie = d3
-  .pie()
-  .value((d) => {
-    return d;
-  })
-  .sort((a, b) => b - a);
-
-// sort((a,b) => a - b): 시계 방향
-// sort((a,b) => b - a): 반 시계 방향
+  .attr("transform", `translate(${size.width / 2} ${size.height / 2})`);
 
 const arc = d3
   .arc()
-  .innerRadius(radius - 30)
-  .outerRadius(radius);
+  .innerRadius(size.radius - size.thickness)
+  .outerRadius(size.radius);
 
-const arcs = g
-  .selectAll("arc")
+const pie = d3.pie().value(function (d) {
+  console.log("pie value:", d);
+  return d.value;
+});
+
+const path = g
+  .selectAll("path")
   .data(pie(data))
   .enter()
   .append("g")
-  .attr("class", "arc");
+  .on("mouseover", function (e, d) {
+    const currentTarget = e.currentTarget;
+    const g = d3
+      .select(currentTarget)
+      .style("cursor", "pointer")
+      .style("opacity", 0.8)
+      .append("g")
+      .attr("class", "text-group");
 
-arcs
+    console.log(d);
+    const name = g
+      .append("text")
+      .attr("class", "name-text")
+      .text(`${d.data.name}`)
+      .attr("text-anchor", "middle")
+      .attr("dy", "-16px");
+
+    const percent = g
+      .append("text")
+      .attr("class", "value-text")
+      .attr("text-anchor", "middle")
+      .attr("dy", "16px")
+      .style("font-size", "26px")
+      .style("font-weight", "500")
+      .transition()
+      .ease(d3.easeLinear)
+      .duration(250)
+      .tween("text", function (d) {
+        const that = this;
+        const i = d3.interpolate(0, d.data.value);
+        return (t) => {
+          d3.select(that).text(i(t).toFixed(0));
+        };
+      });
+  })
+  .on("mouseout", function (e, d) {
+    const currentTarget = e.currentTarget;
+    d3.select(currentTarget)
+      .style("cursor", "none")
+      .style("opacity", 1)
+      .select(".text-group")
+      .remove();
+  })
   .append("path")
-  .attr("fill", (_, i) => color(i))
-  .transition()
-  .delay((_, i) => i * 600)
-  .duration(600)
-  .attrTween("d", (d) => {
-    const interpolate = d3.interpolate(d.endAngle, d.startAngle);
-    // const interpolate = d3.interpolate(d.startAngle + 0.1, d.endAngle); // 시계 방향 애니메이션
-    return (t) => {
-      d.startAngle = interpolate(t);
-      // d.endAngle = interpolate(t); // 시계 방향 애니메이션
-      return arc(d);
-    };
-  });
+  .attr("d", arc)
+  .style("fill", (_, i) => color(i));
