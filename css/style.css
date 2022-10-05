@@ -1,0 +1,363 @@
+:root {
+  --border-color: rgba(255, 255, 255, 0.239);
+  --button-bg: rgb(255, 255, 255, 0.129);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Roboto", "sans-serif";
+  background-image: linear-gradient(90deg, #0ae0ff, #9900fb);
+}
+
+#container {
+  background-color: var(--border-color);
+  max-width: 1024px;
+  width: 100%;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 6fr 4fr;
+  gap: 16px;
+}
+
+#container main {
+  height: 100%;
+  position: relative;
+  border: 1px solid var(--border-color);
+}
+
+#container main .image-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 85%;
+}
+
+#container main .bottom-controller {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 15%;
+  border-top: 1px solid var(--border-color);
+}
+
+#container aside {
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+}
+
+#container aside h6 {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+#container aside .preview-container {
+  border: 2px solid var(--border-color);
+  height: 0;
+  padding-bottom: 60%;
+  position: relative;
+  margin: 16px 16px 2px 16px;
+}
+
+#container aside .preview-container .preview-cover {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 8px);
+  height: calc(100% - 8px);
+}
+
+#container aside .shift-controller {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+}
+
+#container aside .shift-controller ul {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+  padding: 0 16px;
+}
+
+#container aside .shift-controller button {
+  background-color: var(--button-bg);
+  width: 24px;
+  height: 24px;
+  position: relative;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#container aside .shift-controller button:hover {
+  border: 1px solid var(--border-color);
+}
+
+#container aside .shift-controller button svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  fill: white;
+}
+
+#container aside .zoom-controller,
+#container aside .roate-controller,
+#container aside .flip-controller {
+  border: 1px solid var(--border-color);
+  margin: 0 16px 8px 16px;
+  padding: 8px;
+}
+
+#container aside .zoom-controller ul,
+#container aside .roate-controller ul,
+#container aside .flip-controller ul {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  list-style: none;
+}
+
+#container aside .zoom-controller ul li button,
+#container aside .roate-controller ul li button,
+#container aside .flip-controller ul li button {
+  background-color: var(--button-bg);
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+#container aside .zoom-controller ul li button svg,
+#container aside .roate-controller ul li button svg,
+#container aside .flip-controller ul li button svg {
+  fill: white;
+}
+
+#container aside .zoom-controller ul li button:active,
+#container aside .roate-controller ul li button:active,
+#container aside .flip-controller ul li button:active {
+  border: 1px solid var(--border-color);
+}
+
+#container aside .move-controller {
+  flex: 1;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 1px solid var(--border-color);
+  margin: 0 16px 16px 16px;
+}
+
+#container aside .move-controller .pad {
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  border-radius: 50%;
+  position: relative;
+  background-color: var(--button-bg);
+  margin: 0 auto;
+}
+
+#container aside .move-controller .pad .top {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  left: 50%;
+  bottom: 50%;
+  transform: translate(-50%, -20%) rotate(45deg);
+  border-top-left-radius: 50%;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+#container aside .move-controller .pad .top svg {
+  transform: rotate(135deg);
+}
+
+#container aside .move-controller .pad .left {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  top: 50%;
+  right: 50%;
+  transform: translate(-20%, -50%) rotate(45deg);
+  border-bottom-left-radius: 50%;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+#container aside .move-controller .pad .left svg {
+  transform: rotate(45deg);
+}
+
+#container aside .move-controller .pad .right {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(20%, -50%) rotate(45deg);
+  border-top-right-radius: 50%;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+#container aside .move-controller .pad .right svg {
+  transform: rotate(-135deg);
+}
+
+#container aside .move-controller .pad .bottom {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 20%) rotate(45deg);
+  border-bottom-right-radius: 50%;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+#container aside .move-controller .pad .bottom svg {
+  transform: rotate(-45deg);
+}
+
+#container aside .move-controller .pad button:hover {
+  background: var(--button-bg);
+}
+
+#container main .bottom-controller {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+#container main .bottom-controller .action-buttons {
+  width: 100%;
+  height: 100%;
+  border-right: 1px solid var(--border-color);
+}
+
+#container main .bottom-controller .action-buttons ul {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  gap: 5px;
+  padding: 0 10px;
+}
+
+#container main .bottom-controller .action-buttons ul li {
+  width: 100%;
+  height: 36px;
+}
+
+#container main .bottom-controller .action-buttons ul li button {
+  width: 100%;
+  height: 100%;
+  background-color: var(--button-bg);
+  color: white;
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  cursor: pointer;
+  outline: none;
+}
+
+#container main .bottom-controller .action-buttons ul li button:hover {
+  opacity: 0.7;
+}
+
+.ctrl-cropper,
+.lock {
+  border-right: 1px solid var(--border-color);
+}
+
+.ctrl-cropper,
+.lock,
+.drag-mode {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.ctrl-cropper h6,
+.lock h6,
+.drag-mode h6 {
+  text-align: left;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.ctrl-cropper ul,
+.lock ul,
+.drag-mode ul {
+  width: 100%;
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.ctrl-cropper ul li button,
+.lock ul li button,
+.drag-mode ul li button {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: var(--button-bg);
+  cursor: pointer;
+}
+
+.ctrl-cropper ul li button:active,
+.lock ul li button:active,
+.drag-mode ul li button:active {
+  border: 1px solid var(--border-color);
+}
+
+.ctrl-cropper ul li button svg,
+.lock ul li button svg,
+.drag-mode ul li button svg {
+  fill: #fff;
+}
