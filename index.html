@@ -17,15 +17,20 @@
   <body>
     <section id="container">
       <main>
-        <section class="image-container"></section>
+        <section class="image-container">
+          <div class="image-workspace">
+            <img class="hidden" src="" alt="image" />
+          </div>
+        </section>
         <section class="bottom-controller">
           <div class="action-buttons">
             <ul>
               <li>
-                <button>Upload</button>
+                <button class="upload-btn">Upload</button>
+                <input type="file" id="upload" accept="image/*" />
               </li>
               <li>
-                <button>Download</button>
+                <button class="download-btn">Download</button>
               </li>
             </ul>
           </div>
