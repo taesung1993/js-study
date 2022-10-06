@@ -101,3 +101,5 @@ const path = g
   .append("path")
   .attr("d", arc)
   .style("fill", (_, i) => color(i));
+
+console.log(arc);

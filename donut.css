@@ -1,0 +1,46 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+#container {
+  width: 540px;
+  height: 540px;
+  position: relative;
+  margin: 0 auto;
+  border: 1px solid rgba(0, 0, 0, 0.129);
+}
+
+#container svg {
+  width: 100%;
+  height: 100%;
+}
+
+.data-text.data-text__value {
+  opacity: 0;
+  font-size: 5rem;
+  font-size: 700;
+}
+
+.data-text.data-text__name {
+  opacity: 0;
+  font-size: 1.5rem;
+  font-size: 500;
+}
+
+.data-text.data-text--show {
+  animation: fadeGraphTextIn 0.5s forwards;
+  opacity: 1;
+}
+
+@keyframes fadeGraphTextIn {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
